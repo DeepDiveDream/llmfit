@@ -52,7 +52,12 @@ impl Theme {
         let home = std::env::var("HOME")
             .or_else(|_| std::env::var("USERPROFILE"))
             .ok()?;
-        Some(PathBuf::from(home).join(".config").join("llmfit").join("theme"))
+        Some(
+            PathBuf::from(home)
+                .join(".config")
+                .join("llmfit")
+                .join("theme"),
+        )
     }
 
     /// Save the current theme to disk.

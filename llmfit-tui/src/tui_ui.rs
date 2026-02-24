@@ -148,11 +148,7 @@ fn draw_system_bar(frame: &mut Frame, app: &App, area: Rect, tc: &ThemeColors) {
         .borders(Borders::ALL)
         .border_style(Style::default().fg(tc.border))
         .title(" llmfit ")
-        .title_style(
-            Style::default()
-                .fg(tc.title)
-                .add_modifier(Modifier::BOLD),
-        );
+        .title_style(Style::default().fg(tc.title).add_modifier(Modifier::BOLD));
 
     let paragraph = Paragraph::new(text).block(block);
     frame.render_widget(paragraph, area);
@@ -182,10 +178,7 @@ fn draw_search_and_filters(frame: &mut Frame, app: &App, area: Rect, tc: &ThemeC
             Style::default().fg(tc.muted),
         ))
     } else {
-        Line::from(Span::styled(
-            &app.search_query,
-            Style::default().fg(tc.fg),
-        ))
+        Line::from(Span::styled(&app.search_query, Style::default().fg(tc.fg)))
     };
 
     let search_block = Block::default()
@@ -344,11 +337,7 @@ fn draw_table(frame: &mut Frame, app: &mut App, area: Rect, tc: &ThemeColors) {
                     .add_modifier(Modifier::BOLD),
             )
         } else {
-            Cell::from(*h).style(
-                Style::default()
-                    .fg(tc.accent)
-                    .add_modifier(Modifier::BOLD),
-            )
+            Cell::from(*h).style(Style::default().fg(tc.accent).add_modifier(Modifier::BOLD))
         }
     });
     let header = Row::new(header_cells).height(1);
@@ -419,8 +408,7 @@ fn draw_table(frame: &mut Frame, app: &mut App, area: Rect, tc: &ThemeColors) {
                 Cell::from(installed_icon).style(Style::default().fg(installed_color)),
                 Cell::from(fit.model.name.clone()).style(Style::default().fg(tc.fg)),
                 Cell::from(fit.model.provider.clone()).style(Style::default().fg(tc.muted)),
-                Cell::from(fit.model.parameter_count.clone())
-                    .style(Style::default().fg(tc.fg)),
+                Cell::from(fit.model.parameter_count.clone()).style(Style::default().fg(tc.fg)),
                 Cell::from(format!("{:.0}", fit.score)).style(Style::default().fg(score_color)),
                 Cell::from(tps_text).style(Style::default().fg(tc.fg)),
                 Cell::from(fit.best_quant.clone()).style(Style::default().fg(tc.muted)),
@@ -439,8 +427,7 @@ fn draw_table(frame: &mut Frame, app: &mut App, area: Rect, tc: &ThemeColors) {
                 )
                 .style(Style::default().fg(tc.muted)),
                 Cell::from(fit.fit_text().to_string()).style(Style::default().fg(color)),
-                Cell::from(fit.use_case.label().to_string())
-                    .style(Style::default().fg(tc.muted)),
+                Cell::from(fit.use_case.label().to_string()).style(Style::default().fg(tc.muted)),
             ])
             .style(row_style)
         })
@@ -532,10 +519,7 @@ fn draw_detail(frame: &mut Frame, app: &App, area: Rect, tc: &ThemeColors) {
         ]),
         Line::from(vec![
             Span::styled("  Parameters:  ", Style::default().fg(tc.muted)),
-            Span::styled(
-                &fit.model.parameter_count,
-                Style::default().fg(tc.fg),
-            ),
+            Span::styled(&fit.model.parameter_count, Style::default().fg(tc.fg)),
         ]),
         Line::from(vec![
             Span::styled("  Quantization:", Style::default().fg(tc.muted)),
@@ -604,15 +588,9 @@ fn draw_detail(frame: &mut Frame, app: &App, area: Rect, tc: &ThemeColors) {
                 } else if mlx_installed {
                     Span::styled("✓ MLX", Style::default().fg(tc.good).bold())
                 } else if any_available {
-                    Span::styled(
-                        "✗ No  (press d to pull)",
-                        Style::default().fg(tc.muted),
-                    )
+                    Span::styled("✗ No  (press d to pull)", Style::default().fg(tc.muted))
                 } else {
-                    Span::styled(
-                        "- No provider running",
-                        Style::default().fg(tc.muted),
-                    )
+                    Span::styled("- No provider running", Style::default().fg(tc.muted))
                 }
             },
         ]),
@@ -757,10 +735,7 @@ fn draw_detail(frame: &mut Frame, app: &App, area: Rect, tc: &ThemeColors) {
         ]),
         Line::from(vec![
             Span::styled("  Run Mode:    ", Style::default().fg(tc.muted)),
-            Span::styled(
-                fit.run_mode_text(),
-                Style::default().fg(tc.fg).bold(),
-            ),
+            Span::styled(fit.run_mode_text(), Style::default().fg(tc.fg).bold()),
         ]),
         Line::from(""),
         Line::from(Span::styled(
